@@ -1,0 +1,195 @@
+:root {
+  --bg: #f7f7f8;
+  --card: #ffffff;
+  --text: #2c2c2c;
+  --muted: #6f6f73;
+  --line: #e5e5e9;
+  --accent: #4f5562;
+  --accent-soft: #eef0f4;
+  --done: #8f949e;
+  --radius: 16px;
+  --shadow: 0 8px 24px rgba(24, 24, 27, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #fdfdfd 0%, var(--bg) 100%);
+  min-height: 100vh;
+}
+
+.hero {
+  text-align: center;
+  padding: 2.5rem 1rem 1.5rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  letter-spacing: -0.03em;
+}
+
+.hero p {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+}
+
+.cat-badge {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 2.2rem;
+  background: radial-gradient(circle at 30% 20%, #fff 0%, #f0f1f5 70%);
+  box-shadow: var(--shadow);
+}
+
+.dashboard {
+  width: min(1120px, 92vw);
+  margin: 0 auto 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.card.wide {
+  grid-column: 1 / -1;
+}
+
+h2 {
+  margin: 0 0 0.9rem;
+  font-size: 1.1rem;
+}
+
+.card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+button {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.55rem 0.8rem;
+}
+
+.ghost-btn {
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 0.45rem 0.7rem;
+}
+
+.checklist,
+.plant-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fbfbfc;
+}
+
+.check-item.done span {
+  text-decoration: line-through;
+  color: var(--done);
+}
+
+.check-item input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.frequency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.freq-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.75rem;
+  background: #fcfcfd;
+}
+
+.freq-card p {
+  margin: 0 0 0.45rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.freq-card select {
+  width: 100%;
+  padding: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.plant-form {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+input,
+textarea {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+}
+
+.plant-list li {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.6rem;
+  background: #fbfbfc;
+}
+
+.plant-list strong {
+  display: block;
+}

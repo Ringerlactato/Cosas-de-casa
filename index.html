@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosas de casa</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="cat-badge" aria-hidden="true">🐈‍⬛</div>
+      <h1>Cosas de casa</h1>
+      <p>Panel privado para mantener todo al día en casa.</p>
+    </header>
+
+    <main class="dashboard">
+      <section class="card">
+        <div class="card-title-row">
+          <h2>Tareas pendientes</h2>
+          <button class="ghost-btn" data-add-item="pendingTasks">Añadir</button>
+        </div>
+        <ul id="pendingTasks" class="checklist"></ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title-row">
+          <h2>Lista de la compra</h2>
+          <button class="ghost-btn" data-add-item="shoppingList">Añadir</button>
+        </div>
+        <ul id="shoppingList" class="checklist"></ul>
+      </section>
+
+      <section class="card wide">
+        <h2>Frecuencia de limpieza</h2>
+        <div id="cleaningGrid" class="frequency-grid"></div>
+      </section>
+
+      <section class="card">
+        <h2>Riego de plantas</h2>
+        <form id="plantForm" class="plant-form">
+          <label>
+            Especie
+            <input type="text" id="plantSpecies" placeholder="Ej. Monstera deliciosa" required />
+          </label>
+          <label>
+            Frecuencia
+            <input type="text" id="plantFrequency" placeholder="Ej. cada 7 días" required />
+          </label>
+          <label>
+            Recomendaciones de cuidado
+            <textarea id="plantCare" rows="3" placeholder="Luz indirecta, evitar encharcar..."></textarea>
+          </label>
+          <button type="submit" class="primary-btn">Guardar planta</button>
+        </form>
+        <ul id="plantList" class="plant-list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Ropa de cama</h2>
+        <div id="beddingGrid" class="frequency-grid"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
