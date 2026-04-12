@@ -46,22 +46,32 @@
       </section>
 
       <section class="card">
-        <h2>Cuidado de plantas</h2>
-        <form id="plantForm" class="stack-form">
-          <input id="plantName" type="text" placeholder="Especie o nombre" required />
-          <select id="plantWatering" required>
-            <option value="">Frecuencia de riego</option>
-            <option>Diario</option>
-            <option>Cada 2 días</option>
-            <option>Semanal</option>
-            <option>Quincenal</option>
-          </select>
-          <input id="plantLight" type="text" placeholder="Exposición a la luz (ej. indirecta)" required />
-          <textarea id="plantNotes" rows="3" placeholder="Notas de cuidado"></textarea>
-          <button type="submit">Guardar planta</button>
-        </form>
-        <div id="plantCards" class="plant-cards"></div>
-      </section>
+  <h2>Jardín</h2>
+  <form id="plantForm" class="stack-form">
+    <input id="plantName" type="text" placeholder="Especie o nombre" required />
+
+    <button id="searchPlantBtn" type="button">Buscar cuidados</button>
+
+    <div id="plantStatus" class="plant-status"></div>
+
+    <select id="plantWatering" required>
+      <option value="">Frecuencia de riego</option>
+      <option>Diario</option>
+      <option>Cada 2 días</option>
+      <option>Semanal</option>
+      <option>Quincenal</option>
+      <option>Mensual</option>
+    </select>
+
+    <input id="plantLight" type="text" placeholder="Exposición a la luz" required />
+    <input id="plantLocation" type="text" placeholder="Interior o exterior" />
+    <textarea id="plantNotes" rows="3" placeholder="Notas de cuidado"></textarea>
+
+    <button type="submit">Guardar planta</button>
+  </form>
+
+  <div id="plantCards" class="plant-cards"></div>
+</section>
 
       <section class="card wide">
         <div class="calendar-head">
