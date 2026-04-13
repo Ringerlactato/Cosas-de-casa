@@ -1,14 +1,14 @@
 :root {
   --bg: #f7f7f8;
   --card: #ffffff;
-  --text: #2c2c2c;
-  --muted: #6f6f73;
-  --line: #e5e5e9;
-  --accent: #4f5562;
-  --accent-soft: #eef0f4;
-  --done: #8f949e;
-  --radius: 16px;
-  --shadow: 0 8px 24px rgba(24, 24, 27, 0.06);
+  --text: #232326;
+  --muted: #666a73;
+  --line: #e4e6eb;
+  --accent: #4f5666;
+  --soft: #f2f4f7;
+  --holiday: #dff1ff;
+  --radius: 14px;
+  --shadow: 0 8px 24px rgba(24, 24, 27, 0.07);
 }
 
 * {
@@ -17,46 +17,49 @@
 
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
   color: var(--text);
-  background: linear-gradient(180deg, #fdfdfd 0%, var(--bg) 100%);
-  min-height: 100vh;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.hero {
-  text-align: center;
-  padding: 2.5rem 1rem 1.5rem;
+.header {
+  padding: 1.5rem 1rem;
 }
 
-.hero h1 {
-  margin: 0;
-  font-size: clamp(1.9rem, 3.5vw, 3rem);
-  letter-spacing: -0.03em;
+.brand {
+  width: min(1100px, 94vw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
 }
 
-.hero p {
-  margin: 0.65rem 0 0;
-  color: var(--muted);
-}
-
-.cat-badge {
-  width: 72px;
-  height: 72px;
-  margin: 0 auto 0.8rem;
+.cat-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   border: 1px solid var(--line);
-  border-radius: 999px;
   display: grid;
   place-items: center;
-  font-size: 2.2rem;
-  background: radial-gradient(circle at 30% 20%, #fff 0%, #f0f1f5 70%);
+  background: #fff;
   box-shadow: var(--shadow);
 }
 
-.dashboard {
-  width: min(1120px, 92vw);
-  margin: 0 auto 2.5rem;
+h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+}
+
+.header p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.layout {
+  width: min(1100px, 94vw);
+  margin: 0 auto 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 1rem;
 }
 
@@ -72,124 +75,185 @@ body {
   grid-column: 1 / -1;
 }
 
-h2 {
-  margin: 0 0 0.9rem;
-  font-size: 1.1rem;
+h2,
+h3 {
+  margin: 0 0 0.8rem;
 }
 
-.card-title-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.75rem;
+.inline-form,
+.stack-form,
+.event-form {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
 }
 
+.inline-form {
+  grid-template-columns: 1fr auto;
+}
+
+input,
+select,
+textarea,
 button {
+  border: 1px solid var(--line);
   border-radius: 10px;
-  border: 1px solid transparent;
-  cursor: pointer;
+  padding: 0.55rem 0.7rem;
   font: inherit;
 }
 
-.primary-btn {
-  background: var(--accent);
-  color: #fff;
-  padding: 0.55rem 0.8rem;
-}
-
-.ghost-btn {
-  background: var(--accent-soft);
+button {
+  background: var(--soft);
   color: var(--accent);
-  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.checklist,
-.plant-list {
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.98);
+}
+
+.check-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 0.55rem;
+  gap: 0.45rem;
 }
 
 .check-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.45rem 0.55rem;
+  gap: 0.55rem;
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: #fbfbfc;
+  padding: 0.45rem 0.55rem;
 }
 
-.check-item.done span {
+.check-item.done .label {
+  color: #8a8f99;
   text-decoration: line-through;
-  color: var(--done);
 }
 
-.check-item input[type='checkbox'] {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--accent);
+.delete {
+  background: #fff;
 }
 
-.frequency-grid {
+.cleaning-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
-.freq-card {
+.cleaning-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 0.5rem;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem;
+}
+
+.next-date {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.plant-cards {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.plant-card {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 0.75rem;
-  background: #fcfcfd;
-}
-
-.freq-card p {
-  margin: 0 0 0.45rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-.freq-card select {
-  width: 100%;
-  padding: 0.45rem;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fff;
-}
-
-.plant-form {
-  display: grid;
-  gap: 0.6rem;
-  margin-bottom: 0.9rem;
-}
-
-label {
-  display: grid;
-  gap: 0.3rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-input,
-textarea {
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 0.55rem 0.65rem;
-  font: inherit;
-  color: var(--text);
-  background: #fff;
-}
-
-.plant-list li {
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 0.6rem;
   background: #fbfbfc;
 }
 
-.plant-list strong {
-  display: block;
+.plant-card p {
+  margin: 0.35rem 0;
+}
+
+.calendar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.month-controls {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.calendar-cell {
+  min-height: 88px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.4rem;
+  background: #fff;
+}
+
+.calendar-cell.out-month {
+  opacity: 0.35;
+}
+
+.calendar-cell.holiday {
+  background: var(--holiday);
+}
+
+.day-num {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.25rem;
+}
+
+.dot.comun { background: #8ea2c9; }
+.dot.guardia { background: #9b86b8; }
+.dot.otro { background: #89b59d; }
+
+.day-events {
+  margin-top: 0.25rem;
+  font-size: 0.73rem;
+}
+
+.event-form {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.holiday-form {
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 760px) {
+  .cleaning-row {
+    grid-template-columns: 1fr;
+  }
+
+  .inline-form {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-cell {
+    min-height: 72px;
+  }
 }
