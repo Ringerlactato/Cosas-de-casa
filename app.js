@@ -2,6 +2,33 @@
 const STORAGE_KEY = 'cosas-casa-dashboard-v2';
 const cleaningItems = ['Ropa de cama', 'Lavavajillas', 'Arenero de Quemaito', 'Cuencos de Quemaito', 'Trapos de cocina'];
 const frequencyOptions = ['Diario', 'Cada 2 días', 'Semanal', 'Quincenal', 'Mensual'];
+const plantProfiles = {
+  monstera: {
+    watering: 'Semanal',
+    light: 'Luz indirecta brillante',
+    notes: 'Sustrato drenante; deja secar ligeramente la capa superior entre riegos.'
+  },
+  pothos: {
+    watering: 'Cada 7-10 días',
+    light: 'Luz media a indirecta',
+    notes: 'Tolera poca luz; evita encharcamientos y limpia hojas con paño húmedo.'
+  },
+  ficus: {
+    watering: 'Semanal',
+    light: 'Muy luminosa sin sol fuerte',
+    notes: 'No mover constantemente de sitio; sensible a cambios bruscos.'
+  },
+  sansevieria: {
+    watering: 'Cada 2-3 semanas',
+    light: 'Luz media o baja',
+    notes: 'Riego escaso; ideal para principiantes.'
+  },
+  aloe: {
+    watering: 'Cada 2-3 semanas',
+    light: 'Mucha luz',
+    notes: 'Sustrato para cactus y drenaje excelente.'
+  }
+};
 
 const initialState = {
   tasks: [],
@@ -9,11 +36,27 @@ const initialState = {
   cleaning: cleaningItems.map((name) => ({ name, lastDate: '', frequency: 'Semanal' })),
   plants: [],
   events: {},
-  holidays: {
-    // Estructura editable manualmente desde la UI (YYYY-MM-DD: nombre)
-    '2026-01-01': 'Año Nuevo'
-  }
+  holidays: defaultHolidaysForYear(2026)
 };
+
+function defaultHolidaysForYear(year) {
+  if (year !== 2026) return {};
+  // Festivos nacionales + autonómicos de la Comunitat Valenciana (2026).
+  return {
+    '2026-01-01': 'Año Nuevo',
+    '2026-01-06': 'Epifanía del Señor',
+    '2026-03-19': 'San José',
+    '2026-04-03': 'Viernes Santo',
+    '2026-04-06': 'Lunes de Pascua',
+    '2026-05-01': 'Fiesta del Trabajo',
+    '2026-06-24': 'San Juan',
+    '2026-08-15': 'Asunción de la Virgen',
+    '2026-10-09': 'Día de la Comunitat Valenciana',
+    '2026-10-12': 'Fiesta Nacional de España',
+    '2026-12-08': 'Inmaculada Concepción',
+    '2026-12-25': 'Natividad del Señor'
+  };
+}
 
 function getState() {
   try {
@@ -38,6 +81,22 @@ function save() {
 
 function uid() {
   return Math.random().toString(36).slice(2, 9);
+}
+
+function normalizeText(text) {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+function findPlantProfile(species) {
+  const normalized = normalizeText(species);
+  if (!normalized) return null;
+
+  const key = Object.keys(plantProfiles).find((profileKey) => normalized.includes(profileKey));
+  return key ? plantProfiles[key] : null;
 }
 
 function addChecklistItem(key, inputId) {
@@ -221,7 +280,7 @@ function renderCalendar() {
 
     if (state.holidays[key]) {
       const holidayName = document.createElement('div');
-      holidayName.textContent = `🎉 ${state.holidays[key]}`;
+      holidayName.textContent = state.holidays[key];
       eventsWrap.append(holidayName);
     }
 
@@ -253,6 +312,23 @@ function setupEvents() {
     e.target.reset();
     save();
     renderPlants();
+  });
+
+  document.getElementById('plantName').addEventListener('change', (e) => {
+    const profile = findPlantProfile(e.target.value);
+    if (!profile) return;
+
+    const watering = document.getElementById('plantWatering');
+    if (![...watering.options].some((opt) => opt.value === profile.watering)) {
+      const option = document.createElement('option');
+      option.value = profile.watering;
+      option.textContent = profile.watering;
+      watering.append(option);
+    }
+
+    watering.value = profile.watering;
+    document.getElementById('plantLight').value = profile.light;
+    document.getElementById('plantNotes').value = profile.notes;
   });
 
   document.getElementById('eventForm').addEventListener('submit', (e) => {
