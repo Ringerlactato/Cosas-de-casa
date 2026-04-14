@@ -3,10 +3,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
-  const nombre = String(req.query.nombre || '').trim();
+  const nombreOriginal = String(req.query.nombre || '').trim();
   const apiKey = process.env.PERENUAL_API_KEY;
 
-  if (!nombre) {
+  if (!nombreOriginal) {
     return res.status(400).json({ error: 'Falta el nombre de la planta' });
   }
 
@@ -14,44 +14,80 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Falta configurar PERENUAL_API_KEY en Vercel' });
   }
 
-  try {
-    // 1) Buscar la especie
+  const aliasMap = {
+    'plumbago capensis': 'plumbago auriculata',
+    'cinta': 'chlorophytum comosum',
+    'potus': 'pothos',
+    'lengua de suegra': 'sansevieria',
+    'aloe vera': 'aloe'
+  };
+
+  function normalizeText(text) {
+    return text
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+  }
+
+  async function searchSpecies(query) {
     const searchUrl =
       `https://perenual.com/api/v2/species-list?key=${encodeURIComponent(apiKey)}` +
-      `&q=${encodeURIComponent(nombre)}`;
+      `&q=${encodeURIComponent(query)}`;
 
-    const searchResponse = await fetch(searchUrl);
+    const response = await fetch(searchUrl);
 
-    if (!searchResponse.ok) {
-      return res.status(searchResponse.status).json({
-        error: 'Error al consultar Perenual (búsqueda)'
-      });
+    if (!response.ok) {
+      throw new Error(`Error en búsqueda: ${response.status}`);
     }
 
-    const searchData = await searchResponse.json();
-    const firstMatch = searchData?.data?.[0];
+    const data = await response.json();
+    return data?.data || [];
+  }
 
-    if (!firstMatch) {
-      return res.status(404).json({
-        error: 'No se ha encontrado información para esta especie'
-      });
-    }
-
-    // 2) Pedir detalle por ID
+  async function fetchSpeciesDetail(id) {
     const detailUrl =
-      `https://perenual.com/api/v2/species/details/${firstMatch.id}?key=${encodeURIComponent(apiKey)}`;
+      `https://perenual.com/api/v2/species/details/${id}?key=${encodeURIComponent(apiKey)}`;
 
-    const detailResponse = await fetch(detailUrl);
+    const response = await fetch(detailUrl);
 
-    if (!detailResponse.ok) {
-      return res.status(detailResponse.status).json({
-        error: 'Error al consultar Perenual (detalle)'
+    if (!response.ok) {
+      throw new Error(`Error en detalle: ${response.status}`);
+    }
+
+    return response.json();
+  }
+
+  try {
+    const normalizedOriginal = normalizeText(nombreOriginal);
+
+    const queriesToTry = [
+      nombreOriginal,
+      aliasMap[normalizedOriginal],
+      ...nombreOriginal.split(' ').filter(Boolean)
+    ].filter(Boolean);
+
+    let matches = [];
+    let usedQuery = '';
+
+    for (const query of queriesToTry) {
+      matches = await searchSpecies(query);
+      if (matches.length) {
+        usedQuery = query;
+        break;
+      }
+    }
+
+    if (!matches.length) {
+      return res.status(404).json({
+        error: `No se ha encontrado información para esta especie`,
+        searched: queriesToTry
       });
     }
 
-    const detailData = await detailResponse.json();
+    const firstMatch = matches[0];
+    const detailData = await fetchSpeciesDetail(firstMatch.id);
 
-    // 3) Normalizar la respuesta para tu frontend
     const sunlight = Array.isArray(detailData.sunlight)
       ? detailData.sunlight.join(', ')
       : detailData.sunlight || 'No disponible';
@@ -65,13 +101,15 @@ export default async function handler(req, res) {
 
     const notes = [
       detailData.care_level ? `Nivel de cuidado: ${detailData.care_level}` : null,
-      detailData.description ? detailData.description : null
+      detailData.description || null
     ]
       .filter(Boolean)
       .join(' · ');
 
     return res.status(200).json({
-      nombre: detailData.common_name || firstMatch.common_name || nombre,
+      nombreBuscado: nombreOriginal,
+      consultaUsada: usedQuery,
+      nombre: detailData.common_name || firstMatch.common_name || nombreOriginal,
       cientifico:
         Array.isArray(detailData.scientific_name) && detailData.scientific_name.length
           ? detailData.scientific_name[0]
@@ -89,7 +127,8 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Error en /api/plantas:', error);
     return res.status(500).json({
-      error: 'Error interno al consultar la API de plantas'
+      error: 'Error interno al consultar la API de plantas',
+      details: error.message
     });
   }
 }
