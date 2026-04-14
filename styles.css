@@ -33,19 +33,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.7rem;
-}
-
-.cat-logo {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  display: grid;
-  place-items: center;
-  background: #fff;
-  box-shadow: var(--shadow);
-  color: #4a4f59;
+  gap: 0.2rem;
 }
 
 h1 {
@@ -54,11 +42,6 @@ h1 {
   font-weight: 800;
   letter-spacing: 0.06em;
   text-align: center;
-}
-
-.cat-logo svg {
-  width: 32px;
-  height: 32px;
 }
 
 .header p {
@@ -149,10 +132,6 @@ button:hover {
 }
 
 .check-item input[type='checkbox'] {
-  accent-color: #98a2b3;
-}
-
-#shoppingList .check-item input[type='checkbox'] {
   appearance: none;
   width: 18px;
   height: 18px;
@@ -163,12 +142,12 @@ button:hover {
   cursor: pointer;
 }
 
-#shoppingList .check-item input[type='checkbox']:checked {
+.check-item input[type='checkbox']:checked {
   background: #2f80ed;
   border-color: #2f80ed;
 }
 
-#shoppingList .check-item input[type='checkbox']:checked::after {
+.check-item input[type='checkbox']:checked::after {
   content: '';
   position: absolute;
   left: 5px;
@@ -203,23 +182,21 @@ button:hover {
   font-size: 0.9rem;
   color: var(--muted);
 }
-  
-.plant-status {
-  min-height: 1.25rem;
-  font-size: 0.95rem;
-  color: #4b5563;
+
+.plant-cards {
+  display: grid;
+  gap: 0.6rem;
 }
 
-.plant-status.loading {
-  color: #2563eb;
+.plant-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.75rem;
+  background: #fbfbfc;
 }
 
-.plant-status.error {
-  color: #dc2626;
-}
-
-.plant-status.success {
-  color: #059669;
+.plant-card p {
+  margin: 0.35rem 0;
 }
 
 .calendar-head {
@@ -272,9 +249,10 @@ button:hover {
   margin-right: 0.25rem;
 }
 
-.dot.comun { background: #8ea2c9; }
-.dot.guardia { background: #9b86b8; }
-.dot.otro { background: #89b59d; }
+.dot.comida-familiar { background: #8ea2c9; }
+.dot.refuerzo { background: #89b59d; }
+.dot.guardia-adrian { background: #9b86b8; }
+.dot.guardia-jm { background: #6f7fa1; }
 
 .day-events {
   margin-top: 0.25rem;
