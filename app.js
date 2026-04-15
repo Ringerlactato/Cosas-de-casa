@@ -69,7 +69,7 @@ async function searchPlantCare() {
   renderPlants();
 })
     
-
+<p><b>Ubicación:</b> ${plant.location || 'No disponible'}</p>
    const data = await response.json();
 
     const mappedData = {
