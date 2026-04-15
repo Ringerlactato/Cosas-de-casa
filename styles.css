@@ -199,6 +199,40 @@ button:hover {
   margin: 0.35rem 0;
 }
 
+.plant-status {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: -0.1rem;
+  margin-bottom: 0.15rem;
+}
+
+.plant-status:empty {
+  display: none;
+}
+
+.plant-status.loading {
+  color: #2563eb;
+}
+
+.plant-status.error {
+  color: #dc2626;
+}
+
+.plant-status.success {
+  color: #059669;
+}
+
+#searchPlantBtn {
+  background: #eef4ff;
+  color: #2f5da8;
+  border-color: #d7e5ff;
+  font-weight: 600;
+}
+
+#searchPlantBtn:hover {
+  background: #e3efff;
+}
+
 .calendar-head {
   display: flex;
   justify-content: space-between;
