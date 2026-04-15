@@ -20,6 +20,40 @@ const initialState = {
   holidays: defaultHolidaysForYear(2026)
 };
 
+async function searchPlantCare() {
+  const nombre = plantNameInput.value.trim();
+
+  if (!nombre) {
+    setPlantStatus('Escribe una especie de planta antes de buscar.', 'error');
+    return;
+  }
+
+  setPlantStatus('Buscando cuidados...', 'loading');
+
+  try {
+    const response = await fetch(`/api/plantas?nombre=${encodeURIComponent(nombre)}`);
+
+    if (!response.ok) {
+      throw new Error('No se pudo obtener información de la planta');
+    }
+
+    const data = await response.json();
+
+    const mappedData = {
+      riego: data.riego || data.watering || '',
+      luz: data.luz || data.light || '',
+      ubicacion: data.ubicacion || data.location || '',
+      notas: data.notas || data.notes || ''
+    };
+
+    autofillPlantFields(mappedData);
+    setPlantStatus('Cuidados cargados correctamente.', 'success');
+  } catch (error) {
+    console.error('Error consultando /api/plantas:', error);
+    setPlantStatus('No se ha podido obtener información de la planta.', 'error');
+  }
+}
+
 function defaultHolidaysForYear(year) {
   if (year !== 2026) return {};
   // Festivos nacionales + autonómicos de la Comunitat Valenciana (2026).
