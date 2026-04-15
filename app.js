@@ -2,33 +2,14 @@
 const STORAGE_KEY = 'cosas-casa-dashboard-v2';
 const cleaningItems = ['Ropa de cama', 'Lavavajillas', 'Arenero', 'Cuencos', 'Trapos de cocina'];
 const frequencyOptions = ['Diario', 'Cada 2 días', 'Semanal', 'Quincenal', 'Mensual'];
-const plantProfiles = {
-  monstera: {
-    watering: 'Weekly',
-    light: 'Bright indirect light',
-    notes: 'Use well-draining soil and let the top layer dry out between waterings.'
-  },
-  pothos: {
-    watering: 'Every 7-10 days',
-    light: 'Medium to indirect light',
-    notes: 'Tolerates lower light; avoid overwatering and clean leaves regularly.'
-  },
-  ficus: {
-    watering: 'Weekly',
-    light: 'Bright light with no harsh direct sun',
-    notes: 'Avoid moving often; sensitive to sudden environment changes.'
-  },
-  sansevieria: {
-    watering: 'Every 2-3 weeks',
-    light: 'Low to medium light',
-    notes: 'Water sparingly; perfect for beginners.'
-  },
-  aloe: {
-    watering: 'Every 2-3 weeks',
-    light: 'High light',
-    notes: 'Use cactus soil and ensure excellent drainage.'
-  }
-};
+const plantNameInput = document.getElementById('plantName');
+const plantWateringSelect = document.getElementById('plantWatering');
+const plantLightInput = document.getElementById('plantLight');
+const plantLocationInput = document.getElementById('plantLocation');
+const plantNotesInput = document.getElementById('plantNotes');
+const plantCards = document.getElementById('plantCards');
+const searchPlantBtn = document.getElementById('searchPlantBtn');
+const plantStatus = document.getElementById('plantStatus');
 
 const initialState = {
   tasks: [],
