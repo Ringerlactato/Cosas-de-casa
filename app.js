@@ -40,7 +40,34 @@ async function searchPlantCare() {
     if (searchPlantBtn) {
   searchPlantBtn.addEventListener('click', searchPlantCare);
 }
-    
+    plantForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const name = plantNameInput.value.trim();
+  const watering = plantWateringSelect.value;
+  const light = plantLightInput.value.trim();
+  const location = plantLocationInput ? plantLocationInput.value.trim() : '';
+  const notes = plantNotesInput.value.trim();
+
+  if (!name || !watering || !light) {
+    setPlantStatus('Completa al menos nombre, riego y luz antes de guardar.', 'error');
+    return;
+  }
+
+  state.plants.unshift({
+    id: uid(),
+    name,
+    watering,
+    light,
+    location,
+    notes
+  });
+
+  e.target.reset();
+  setPlantStatus('Planta guardada correctamente.', 'success');
+  save();
+  renderPlants();
+})
     
 
    const data = await response.json();
