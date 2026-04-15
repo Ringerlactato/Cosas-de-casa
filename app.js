@@ -36,8 +36,14 @@ async function searchPlantCare() {
     if (!response.ok) {
       throw new Error('No se pudo obtener información de la planta');
     }
+    
+    if (searchPlantBtn) {
+  searchPlantBtn.addEventListener('click', searchPlantCare);
+}
+    
+    
 
-    const data = await response.json();
+   const data = await response.json();
 
     const mappedData = {
       riego: data.riego || data.watering || '',
