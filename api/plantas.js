@@ -80,7 +80,7 @@ export default async function handler(req, res) {
 
     if (!matches.length) {
       return res.status(404).json({
-        error: `No se ha encontrado información para esta especie`,
+        error: 'No se ha encontrado información para esta especie',
         searched: queriesToTry
       });
     }
