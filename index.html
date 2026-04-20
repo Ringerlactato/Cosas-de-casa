@@ -12,7 +12,7 @@
         <h1>COSAS DE CASA</h1>
       </div>
     </header>
-
+ 
     <main class="layout">
       <section class="card">
         <h2>Tareas pendientes</h2>
@@ -22,7 +22,7 @@
         </form>
         <ul id="taskList" class="check-list"></ul>
       </section>
-
+ 
       <section class="card">
         <h2>Lista de la compra</h2>
         <form id="shoppingForm" class="inline-form">
@@ -31,40 +31,37 @@
         </form>
         <ul id="shoppingList" class="check-list"></ul>
       </section>
-
+ 
       <section class="card wide">
         <h2>Frecuencia de limpieza</h2>
         <div id="cleaningList" class="cleaning-list"></div>
       </section>
-
+ 
       <section class="card">
-  <h2>Jardín</h2>
-  <form id="plantForm" class="stack-form">
-    <input id="plantName" type="text" placeholder="Especie o nombre" required />
-
-    <button id="searchPlantBtn" type="button">Buscar cuidados</button>
-
-    <div id="plantStatus" class="plant-status"></div>
-
-    <select id="plantWatering" required>
-      <option value="">Frecuencia de riego</option>
-      <option>Diario</option>
-      <option>Cada 2 días</option>
-      <option>Semanal</option>
-      <option>Quincenal</option>
-      <option>Mensual</option>
-    </select>
-
-    <input id="plantLight" type="text" placeholder="Exposición a la luz" required />
-    <input id="plantLocation" type="text" placeholder="Interior o exterior" />
-    <textarea id="plantNotes" rows="3" placeholder="Notas de cuidado"></textarea>
-
-    <button type="submit">Guardar planta</button>
-  </form>
-
-  <div id="plantCards" class="plant-cards"></div>
-</section>
-
+        <h2>Jardín</h2>
+        <form id="plantForm" class="stack-form">
+          <input id="plantName" type="text" placeholder="Especie o nombre" required />
+          <button id="searchPlantBtn" type="button">Buscar cuidados</button>
+          <div id="plantStatus" class="plant-status"></div>
+ 
+          <select id="plantWatering" required>
+            <option value="">Frecuencia de riego</option>
+            <option>Diario</option>
+            <option>Cada 2 días</option>
+            <option>Semanal</option>
+            <option>Quincenal</option>
+            <option>Mensual</option>
+          </select>
+ 
+          <input id="plantLight" type="text" placeholder="Exposición a la luz" required />
+          <input id="plantLocation" type="text" placeholder="Interior o exterior" />
+          <textarea id="plantNotes" rows="3" placeholder="Notas de cuidado"></textarea>
+          <button type="submit">Guardar planta</button>
+        </form>
+ 
+        <div id="plantCards" class="plant-cards"></div>
+      </section>
+ 
       <section class="card wide">
         <div class="calendar-head">
           <h2>Calendario compartido</h2>
@@ -74,9 +71,9 @@
             <button id="nextMonth" type="button">→</button>
           </div>
         </div>
-
+ 
         <div class="calendar-grid" id="calendarGrid"></div>
-
+ 
         <form id="eventForm" class="event-form">
           <h3>Eventos</h3>
           <input id="eventDate" type="date" required />
@@ -89,7 +86,7 @@
           </select>
           <button type="submit">Guardar evento</button>
         </form>
-
+ 
         <form id="holidayForm" class="event-form holiday-form">
           <h3>Festivos manuales</h3>
           <input id="holidayDate" type="date" required />
@@ -98,7 +95,7 @@
         </form>
       </section>
     </main>
-
+ 
     <script src="app.js"></script>
   </body>
 </html>
