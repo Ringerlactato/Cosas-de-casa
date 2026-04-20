@@ -10,22 +10,22 @@
   --radius: 14px;
   --shadow: 0 8px 24px rgba(24, 24, 27, 0.07);
 }
-
+ 
 * {
   box-sizing: border-box;
 }
-
+ 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
-
+ 
 .header {
   padding: 1.5rem 1rem;
 }
-
+ 
 .brand {
   width: min(1100px, 94vw);
   margin: 0 auto;
@@ -35,7 +35,7 @@ body {
   justify-content: center;
   gap: 0.2rem;
 }
-
+ 
 h1 {
   margin: 0;
   font-size: clamp(2rem, 5vw, 3.8rem);
@@ -43,12 +43,12 @@ h1 {
   letter-spacing: 0.06em;
   text-align: center;
 }
-
+ 
 .header p {
   margin: 0.25rem 0 0;
   color: var(--muted);
 }
-
+ 
 .layout {
   width: min(1100px, 94vw);
   margin: 0 auto 2rem;
@@ -56,7 +56,7 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 1rem;
 }
-
+ 
 .card {
   background: var(--card);
   border: 1px solid var(--line);
@@ -64,16 +64,16 @@ h1 {
   padding: 1rem;
   box-shadow: var(--shadow);
 }
-
+ 
 .card.wide {
   grid-column: 1 / -1;
 }
-
+ 
 h2,
 h3 {
   margin: 0 0 0.8rem;
 }
-
+ 
 .inline-form,
 .stack-form,
 .event-form {
@@ -81,11 +81,11 @@ h3 {
   gap: 0.5rem;
   margin-bottom: 0.9rem;
 }
-
+ 
 .inline-form {
   grid-template-columns: 1fr auto;
 }
-
+ 
 input,
 select,
 textarea,
@@ -95,19 +95,19 @@ button {
   padding: 0.55rem 0.7rem;
   font: inherit;
 }
-
+ 
 button {
   background: var(--soft);
   color: var(--accent);
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
+ 
 button:hover {
   transform: translateY(-1px);
   filter: brightness(0.98);
 }
-
+ 
 .check-list {
   list-style: none;
   margin: 0;
@@ -115,7 +115,7 @@ button:hover {
   display: grid;
   gap: 0.45rem;
 }
-
+ 
 .check-item {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -125,12 +125,12 @@ button:hover {
   border-radius: 10px;
   padding: 0.45rem 0.55rem;
 }
-
+ 
 .check-item.done .label {
   color: #8a8f99;
   text-decoration: line-through;
 }
-
+ 
 .check-item input[type='checkbox'] {
   appearance: none;
   width: 18px;
@@ -141,12 +141,12 @@ button:hover {
   position: relative;
   cursor: pointer;
 }
-
+ 
 .check-item input[type='checkbox']:checked {
   background: #2f80ed;
   border-color: #2f80ed;
 }
-
+ 
 .check-item input[type='checkbox']:checked::after {
   content: '';
   position: absolute;
@@ -158,16 +158,16 @@ button:hover {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
-
+ 
 .delete {
   background: #fff;
 }
-
+ 
 .cleaning-list {
   display: grid;
   gap: 0.6rem;
 }
-
+ 
 .cleaning-row {
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr 1fr;
@@ -177,62 +177,66 @@ button:hover {
   border-radius: 10px;
   padding: 0.55rem;
 }
-
+ 
 .next-date {
   font-size: 0.9rem;
   color: var(--muted);
 }
-
+ 
 .plant-cards {
   display: grid;
   gap: 0.6rem;
 }
-
+ 
 .plant-card {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 0.75rem;
   background: #fbfbfc;
 }
-
+ 
 .plant-card p {
   margin: 0.35rem 0;
 }
-
+ 
+.plant-card button {
+  margin-top: 0.5rem;
+}
+ 
 .plant-status {
   font-size: 0.88rem;
   color: var(--muted);
   margin-top: -0.1rem;
   margin-bottom: 0.15rem;
 }
-
+ 
 .plant-status:empty {
   display: none;
 }
-
+ 
 .plant-status.loading {
   color: #2563eb;
 }
-
+ 
 .plant-status.error {
   color: #dc2626;
 }
-
+ 
 .plant-status.success {
   color: #059669;
 }
-
+ 
 #searchPlantBtn {
   background: #eef4ff;
   color: #2f5da8;
   border-color: #d7e5ff;
   font-weight: 600;
 }
-
+ 
 #searchPlantBtn:hover {
   background: #e3efff;
 }
-
+ 
 .calendar-head {
   display: flex;
   justify-content: space-between;
@@ -240,20 +244,20 @@ button:hover {
   flex-wrap: wrap;
   gap: 0.6rem;
 }
-
+ 
 .month-controls {
   display: flex;
   gap: 0.4rem;
   align-items: center;
 }
-
+ 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 0.4rem;
   margin-bottom: 1rem;
 }
-
+ 
 .calendar-cell {
   min-height: 88px;
   border: 1px solid var(--line);
@@ -261,20 +265,20 @@ button:hover {
   padding: 0.4rem;
   background: #fff;
 }
-
+ 
 .calendar-cell.out-month {
   opacity: 0.35;
 }
-
+ 
 .calendar-cell.holiday {
   background: var(--holiday);
 }
-
+ 
 .day-num {
   font-size: 0.85rem;
   font-weight: 600;
 }
-
+ 
 .dot {
   width: 7px;
   height: 7px;
@@ -282,34 +286,34 @@ button:hover {
   display: inline-block;
   margin-right: 0.25rem;
 }
-
+ 
 .dot.comida-familiar { background: #8ea2c9; }
 .dot.refuerzo { background: #89b59d; }
 .dot.guardia-adrian { background: #9b86b8; }
 .dot.guardia-jm { background: #6f7fa1; }
-
+ 
 .day-events {
   margin-top: 0.25rem;
   font-size: 0.73rem;
 }
-
+ 
 .event-form {
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 }
-
+ 
 .holiday-form {
   margin-top: 0.4rem;
 }
-
+ 
 @media (max-width: 760px) {
   .cleaning-row {
     grid-template-columns: 1fr;
   }
-
+ 
   .inline-form {
     grid-template-columns: 1fr;
   }
-
+ 
   .calendar-cell {
     min-height: 72px;
   }
