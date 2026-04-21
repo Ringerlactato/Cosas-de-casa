@@ -1,0 +1,282 @@
+:root {
+  --bg: #f7f7f8;
+  --card: #ffffff;
+  --text: #232326;
+  --muted: #666a73;
+  --line: #e4e6eb;
+  --accent: #4f5666;
+  --soft: #f2f4f7;
+  --holiday: #dff1ff;
+  --radius: 14px;
+  --shadow: 0 8px 24px rgba(24, 24, 27, 0.07);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.header {
+  padding: 1.5rem 1rem;
+}
+
+.brand {
+  width: min(1100px, 94vw);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.header p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.layout {
+  width: min(1100px, 94vw);
+  margin: 0 auto 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.card.wide {
+  grid-column: 1 / -1;
+}
+
+h2,
+h3 {
+  margin: 0 0 0.8rem;
+}
+
+.inline-form,
+.stack-form,
+.event-form {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.inline-form {
+  grid-template-columns: 1fr auto;
+}
+
+input,
+select,
+textarea,
+button {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  font: inherit;
+}
+
+button {
+  background: var(--soft);
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.98);
+}
+
+.check-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.check-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.45rem 0.55rem;
+}
+
+.check-item.done .label {
+  color: #8a8f99;
+  text-decoration: line-through;
+}
+
+.check-item input[type='checkbox'] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid #9aa1af;
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+.check-item input[type='checkbox']:checked {
+  background: #2f80ed;
+  border-color: #2f80ed;
+}
+
+.check-item input[type='checkbox']:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1.5px;
+  width: 4px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.delete {
+  background: #fff;
+}
+
+.cleaning-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.cleaning-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 0.5rem;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem;
+}
+
+.next-date {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.plant-cards {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.plant-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.75rem;
+  background: #fbfbfc;
+}
+
+.plant-card p {
+  margin: 0.35rem 0;
+}
+
+.calendar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.month-controls {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.calendar-cell {
+  min-height: 88px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.4rem;
+  background: #fff;
+}
+
+.calendar-cell.out-month {
+  opacity: 0.35;
+}
+
+.calendar-cell.holiday {
+  background: var(--holiday);
+}
+
+.day-num {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.25rem;
+}
+
+.dot.comida-familiar { background: #8ea2c9; }
+.dot.refuerzo { background: #89b59d; }
+.dot.guardia-adrian { background: #9b86b8; }
+.dot.guardia-jm { background: #6f7fa1; }
+
+.day-events {
+  margin-top: 0.25rem;
+  font-size: 0.73rem;
+}
+
+.event-form {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.holiday-form {
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 760px) {
+  .cleaning-row {
+    grid-template-columns: 1fr;
+  }
+
+  .inline-form {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-cell {
+    min-height: 72px;
+  }
+}
