@@ -9,14 +9,6 @@
   <body>
     <header class="header">
       <div class="brand">
-        <div class="cat-logo" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img" aria-label="Icono de gato">
-            <path d="M12 28 8 14l10 8a24 24 0 0 1 28 0l10-8-4 14a24 24 0 1 1-40 0Z" fill="currentColor"></path>
-            <circle cx="24" cy="34" r="3" fill="#fff"></circle>
-            <circle cx="40" cy="34" r="3" fill="#fff"></circle>
-            <path d="M28 43c2 2 6 2 8 0" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
-          </svg>
-        </div>
         <h1>COSAS DE CASA</h1>
       </div>
     </header>
@@ -76,13 +68,14 @@
         <div class="calendar-grid" id="calendarGrid"></div>
 
         <form id="eventForm" class="event-form">
-          <h3>Añadir evento</h3>
+          <h3>Eventos</h3>
           <input id="eventDate" type="date" required />
           <input id="eventTitle" type="text" placeholder="Título del evento" required />
           <select id="eventType" required>
-            <option value="comun">Evento en común</option>
-            <option value="guardia">Guardia</option>
-            <option value="otro">Otro</option>
+            <option value="comida-familiar">Comida familiar</option>
+            <option value="refuerzo">Refuerzo</option>
+            <option value="guardia-adrian">Guardia Adrián</option>
+            <option value="guardia-jm">Guardia JM</option>
           </select>
           <button type="submit">Guardar evento</button>
         </form>

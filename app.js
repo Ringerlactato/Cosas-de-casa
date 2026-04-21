@@ -1,32 +1,32 @@
 // --- Estado base y utilidades de persistencia ---
 const STORAGE_KEY = 'cosas-casa-dashboard-v2';
-const cleaningItems = ['Ropa de cama', 'Lavavajillas', 'Arenero de Quemaito', 'Cuencos de Quemaito', 'Trapos de cocina'];
+const cleaningItems = ['Ropa de cama', 'Lavavajillas', 'Arenero', 'Cuencos', 'Trapos de cocina'];
 const frequencyOptions = ['Diario', 'Cada 2 días', 'Semanal', 'Quincenal', 'Mensual'];
 const plantProfiles = {
   monstera: {
-    watering: 'Semanal',
-    light: 'Luz indirecta brillante',
-    notes: 'Sustrato drenante; deja secar ligeramente la capa superior entre riegos.'
+    watering: 'Weekly',
+    light: 'Bright indirect light',
+    notes: 'Use well-draining soil and let the top layer dry out between waterings.'
   },
   pothos: {
-    watering: 'Cada 7-10 días',
-    light: 'Luz media a indirecta',
-    notes: 'Tolera poca luz; evita encharcamientos y limpia hojas con paño húmedo.'
+    watering: 'Every 7-10 days',
+    light: 'Medium to indirect light',
+    notes: 'Tolerates lower light; avoid overwatering and clean leaves regularly.'
   },
   ficus: {
-    watering: 'Semanal',
-    light: 'Muy luminosa sin sol fuerte',
-    notes: 'No mover constantemente de sitio; sensible a cambios bruscos.'
+    watering: 'Weekly',
+    light: 'Bright light with no harsh direct sun',
+    notes: 'Avoid moving often; sensitive to sudden environment changes.'
   },
   sansevieria: {
-    watering: 'Cada 2-3 semanas',
-    light: 'Luz media o baja',
-    notes: 'Riego escaso; ideal para principiantes.'
+    watering: 'Every 2-3 weeks',
+    light: 'Low to medium light',
+    notes: 'Water sparingly; perfect for beginners.'
   },
   aloe: {
-    watering: 'Cada 2-3 semanas',
-    light: 'Mucha luz',
-    notes: 'Sustrato para cactus y drenaje excelente.'
+    watering: 'Every 2-3 weeks',
+    light: 'High light',
+    notes: 'Use cactus soil and ensure excellent drainage.'
   }
 };
 
@@ -97,6 +97,29 @@ function findPlantProfile(species) {
 
   const key = Object.keys(plantProfiles).find((profileKey) => normalized.includes(profileKey));
   return key ? plantProfiles[key] : null;
+}
+
+function translatePerenualText(text) {
+  const dictionary = {
+    Weekly: 'Semanal',
+    'Every 7-10 days': 'Cada 7-10 días',
+    'Every 2-3 weeks': 'Cada 2-3 semanas',
+    'Bright indirect light': 'Luz indirecta brillante',
+    'Medium to indirect light': 'Luz media a indirecta',
+    'Bright light with no harsh direct sun': 'Muy luminosa sin sol fuerte',
+    'Low to medium light': 'Luz media o baja',
+    'High light': 'Mucha luz',
+    'Use well-draining soil and let the top layer dry out between waterings.':
+      'Usa sustrato drenante y deja secar la capa superior entre riegos.',
+    'Tolerates lower light; avoid overwatering and clean leaves regularly.':
+      'Tolera poca luz; evita encharcamientos y limpia hojas con regularidad.',
+    'Avoid moving often; sensitive to sudden environment changes.':
+      'Evita moverla con frecuencia; es sensible a cambios bruscos.',
+    'Water sparingly; perfect for beginners.': 'Riego escaso; ideal para principiantes.',
+    'Use cactus soil and ensure excellent drainage.': 'Usa sustrato para cactus y buen drenaje.'
+  };
+
+  return dictionary[text] || text;
 }
 
 function addChecklistItem(key, inputId) {
@@ -319,16 +342,20 @@ function setupEvents() {
     if (!profile) return;
 
     const watering = document.getElementById('plantWatering');
-    if (![...watering.options].some((opt) => opt.value === profile.watering)) {
+    const translatedWatering = translatePerenualText(profile.watering);
+    const translatedLight = translatePerenualText(profile.light);
+    const translatedNotes = translatePerenualText(profile.notes);
+
+    if (![...watering.options].some((opt) => opt.value === translatedWatering)) {
       const option = document.createElement('option');
-      option.value = profile.watering;
-      option.textContent = profile.watering;
+      option.value = translatedWatering;
+      option.textContent = translatedWatering;
       watering.append(option);
     }
 
-    watering.value = profile.watering;
-    document.getElementById('plantLight').value = profile.light;
-    document.getElementById('plantNotes').value = profile.notes;
+    watering.value = translatedWatering;
+    document.getElementById('plantLight').value = translatedLight;
+    document.getElementById('plantNotes').value = translatedNotes;
   });
 
   document.getElementById('eventForm').addEventListener('submit', (e) => {
